@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"
+        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous">
+        </script>
+
+</head>
+
+<body>
+    <table id="table">
+        <thead>
+            <tr>
+                <input type="text" id="name" placeholder="Enter Name">
+                <input type="number" id="age" placeholder="Enter Age">
+                <button type="button" id="btn">Add Row</button>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th id="count"></th>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Action</th>
+            </tr>
+        </tbody>
+    </table>
+</body>
+<script>
+    $(document).ready(function () {
+
+        var count = 0;
+        $('#btn').click(function () {
+            var name = $('#name').val();
+            var age = $('#age').val();
+            count += 1;
+            $('#count').html(`<tr><th>` + count + ` Rows were added` + `</th></tr>`);
+            $('tbody').append(`<tr><th> ` + name + `</th><th>` + age + ` </th><th> <button type="button" id="remove">Remove</button> </th></tr>`);
+            $("tr:even").css("background-color", "lightblue");
+
+            $("tr:odd").css("background-color", "orange");
+        });
+
+        $(document).on("click", "#remove", function () {
+            count -= 1;
+            $('#count').html(`<tr><th>` + count + ` Rows Remaining` + `</th></tr>`);
+            $(this).parent().parent().remove();
+            $("tr:even").css("background-color", "orange");
+
+            $("tr:odd").css("background-color", "lightblue");
+        });
+        
+    });
+</script>
+
+</html>
